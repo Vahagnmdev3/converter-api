@@ -26,6 +26,16 @@ class ConverterController extends Controller
     }
 
     /**
+     * Return help message json
+     *
+     * @return array
+     */
+    public function help()
+    {
+        return $this->converter->help();
+    }
+
+    /**
      * Convert from one currency to another
      *
      * @param ConvertRequest $request

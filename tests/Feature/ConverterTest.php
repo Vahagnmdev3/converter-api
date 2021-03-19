@@ -41,6 +41,39 @@ class ConverterTest extends TestCase
     }
 
     /**
+     * Test converter without amount parameter
+     *
+     * @expectedException \Illuminate\Validation\ValidationException
+     * @return void
+     */
+    public function test_convert_without_amount()
+    {
+        $params = [
+            'from' => 'USD',
+            'to' => 'RUB',
+        ];
+        $response = $this->json('GET', '/api/v1/convert', $params);
+        $response->assertJsonValidationErrors(['amount']);
+    }
+
+    /**
+     * Test converter with incorrect type of amount
+     *
+     * @expectedException \Illuminate\Validation\ValidationException
+     * @return void
+     */
+    public function test_convert_with_incorrect_amount()
+    {
+        $params = [
+            'from' => 'USD',
+            'to' => 'RUB',
+            'amount' => 'INCORRECT AMOUNT MUST BE NUMERIC'
+        ];
+        $response = $this->json('GET', '/api/v1/convert', $params);
+        $response->assertJsonValidationErrors(['amount']);
+    }
+
+    /**
      * Test currencies count is 35
      *
      * @return void

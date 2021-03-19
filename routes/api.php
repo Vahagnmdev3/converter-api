@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\ConverterController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,9 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::group([
     'prefix' => '/v1'
 ], function() {
-    Route::get('/help', [\App\Http\Controllers\Api\HelpController::class, 'index']);
-
-    Route::get('/convert', [\App\Http\Controllers\Api\ConverterController::class, 'convert']);
-
-    Route::get('/currencies', [\App\Http\Controllers\Api\ConverterController::class, 'currencies']);
+    Route::get('/help', [ConverterController::class, 'help']);
+    Route::get('/convert', [ConverterController::class, 'convert']);
+    Route::get('/currencies', [ConverterController::class, 'currencies']);
 });
