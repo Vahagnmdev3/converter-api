@@ -65,7 +65,7 @@ class CbrService implements ConverterContract
         $toRate = $this->findRate($responseArray, $to);
 
         return [
-            'amount' => $fromRate > 0 && $toRate > 0 ? $fromRate / $toRate : 0
+            'amount' => $fromRate > 0 && $toRate > 0 ? ($fromRate / $toRate) * $amount : 0
         ];
     }
 
